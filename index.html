@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brightside Denture Clinic</title>
+  <meta name="description" content="Premium, natural-looking dentures. Free consultations, clear pricing and aftercare included.">
+
+  <!-- Inter font (free stand-in for Apple's SF Pro) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       PLACEHOLDERS: everything in [square brackets], the phone
+       number, address, stats and reviews must be replaced with
+       the clinic's real details before going live.
+       ========================================================= -->
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav">
+    <a href="#top" class="logo">Brightside<span>Dentures</span></a>
+    <div class="nav-links">
+      <a href="#showcase">Our dentures</a>
+      <a href="#why">Why us</a>
+      <a href="#journey">Your visit</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-actions">
+      <a href="tel:+6430000000" class="nav-phone">📞 03 000 0000</a>
+      <a href="#contact" class="nav-book">Free consult</a>
+    </div>
+  </nav>
+
+  <!-- ===================== 1. HERO ===================== -->
+  <!-- Goal: say what we do, why trust us, and how to get in touch, in one screen -->
+  <header class="hero" id="top">
+    <div class="hero-content">
+      <div class="eyebrow hero-in">Premium dentures · Christchurch</div>
+      <h1 class="hero-in">Dentures that feel like <span class="accent-text">your own smile.</span></h1>
+      <p class="hero-in lead">Made by a registered clinical dental technician, using premium materials, with a free first consultation and aftercare included.</p>
+      <div class="hero-in cta-row">
+        <a href="#contact" class="btn">Book a free consultation</a>
+        <a href="tel:+6430000000" class="btn btn-ghost">Call 03 000 0000</a>
+      </div>
+
+      <!-- Trust bar: quick reasons to believe -->
+      <ul class="trust-bar hero-in">
+        <li><strong>★ 4.9</strong> Google rating</li>
+        <li><strong>15+</strong> years experience</li>
+        <li><strong>Free</strong> first consult</li>
+        <li><strong>Payment</strong> plans available</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ===================== 2. PINNED STATEMENT ===================== -->
+  <section class="statement">
+    <h2 class="statement-text">Look natural.<br>Feel secure.<br><span class="accent-text">Smile again.</span></h2>
+  </section>
+
+  <!-- ===================== 3. DENTURE SHOWCASE ===================== -->
+  <!-- On scroll: photo starts enlarged, shrinks to the side, then
+       each feature pops out one by one. Then scrolling moves on.
+       Replace images/denture.svg with a real photo of the clinic's work. -->
+  <section class="showcase" id="showcase">
+    <div class="showcase-head">
+      <div class="eyebrow">Crafted, not mass-produced</div>
+      <h2>What makes our dentures different.</h2>
+    </div>
+
+    <div class="showcase-inner">
+      <div class="showcase-media">
+        <img src="images/denture.svg" alt="A premium full upper denture">
+        <!-- Hotspots: --x / --y are % positions on the image. Move them to match your real photo. -->
+        <span class="hotspot" style="--x:50%; --y:22%">1</span>
+        <span class="hotspot" style="--x:17%; --y:42%">2</span>
+        <span class="hotspot" style="--x:50%; --y:50%">3</span>
+        <span class="hotspot" style="--x:81%; --y:61%">4</span>
+        <button class="enlarge-btn" type="button" aria-label="Enlarge photo">⤢ Enlarge</button>
+      </div>
+
+      <ol class="showcase-points">
+        <li class="point">
+          <span class="point-num">1</span>
+          <div>
+            <h3>Multi-layer premium teeth</h3>
+            <p>Built in layers like natural enamel, so they catch the light like real teeth and resist staining and wear.</p>
+          </div>
+        </li>
+        <li class="point">
+          <span class="point-num">2</span>
+          <div>
+            <h3>Lifelike gum shading</h3>
+            <p>Gums are tinted to match your own, so the edge of the denture blends in instead of looking like plastic.</p>
+          </div>
+        </li>
+        <li class="point">
+          <span class="point-num">3</span>
+          <div>
+            <h3>Precision-fitted base</h3>
+            <p>A high-impact base moulded to your mouth for a secure fit that doesn't rock, rub or slip when you talk.</p>
+          </div>
+        </li>
+        <li class="point">
+          <span class="point-num">4</span>
+          <div>
+            <h3>Balanced, comfortable bite</h3>
+            <p>Teeth are set so your bite feels even, making chewing easier and reducing sore spots.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Lightbox for the enlarged photo -->
+  <dialog class="lightbox" id="lightbox" aria-label="Enlarged denture photo">
+    <button class="lightbox-close" type="button" aria-label="Close">✕</button>
+    <img src="images/denture.svg" alt="A premium full upper denture, enlarged">
+  </dialog>
+
+  <!-- ===================== 4. WHY US: COMPARISON ===================== -->
+  <!-- Shows how we compare to a standard denture, without naming competitors -->
+  <section class="why" id="why">
+    <div class="section-head">
+      <div class="eyebrow reveal">Why choose us</div>
+      <h2 class="reveal">Not all dentures are equal.</h2>
+      <p class="reveal">Here's what you get with us compared with a standard, budget denture.</p>
+    </div>
+
+    <div class="compare reveal" role="table" aria-label="Brightside dentures compared with standard dentures">
+      <div class="compare-row compare-header" role="row">
+        <span role="columnheader"></span>
+        <span role="columnheader" class="col-us">Brightside</span>
+        <span role="columnheader">Standard denture</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Teeth</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Multi-layer premium teeth</span>
+        <span role="cell"><i class="no">–</i> Single-colour acrylic</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Gums</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Shade-matched to you</span>
+        <span role="cell"><i class="no">–</i> One standard pink</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Fit</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Try-in before final fitting</span>
+        <span role="cell"><i class="no">–</i> Adjusted after it's made</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Who you see</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Same clinician start to finish</span>
+        <span role="cell"><i class="no">–</i> Often sent to an outside lab</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Aftercare</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Follow-up adjustments included</span>
+        <span role="cell"><i class="no">–</i> Charged per visit</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Pricing</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Fixed quote up front</span>
+        <span role="cell"><i class="no">–</i> Extras added later</span>
+      </div>
+    </div>
+
+    <!-- Stats count up when they scroll into view. Replace with real figures. -->
+    <div class="stats">
+      <div class="stat reveal"><span class="stat-num" data-count="15" data-suffix="+">0</span><span>Years experience</span></div>
+      <div class="stat reveal"><span class="stat-num" data-count="2000" data-suffix="+">0</span><span>Smiles restored</span></div>
+      <div class="stat reveal"><span class="stat-num" data-count="4.9" data-decimals="1" data-suffix="★">0</span><span>Google rating</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== 5. SERVICES ===================== -->
+  <section class="services" id="services">
+    <div class="section-head">
+      <div class="eyebrow reveal">What we offer</div>
+      <h2 class="reveal">The right denture for you.</h2>
+    </div>
+    <div class="service-grid">
+      <article class="service reveal">
+        <h3>Full dentures</h3>
+        <p>A complete set of upper and/or lower teeth, made to look natural and fit securely.</p>
+        <span class="tag">Most popular</span>
+      </article>
+      <article class="service reveal">
+        <h3>Partial dentures</h3>
+        <p>Fills the gaps where some teeth are missing, clipped discreetly to your own teeth.</p>
+      </article>
+      <article class="service reveal">
+        <h3>Implant-retained dentures</h3>
+        <p>Clicks onto implants for the most secure fit. No adhesive, no movement.</p>
+      </article>
+      <article class="service reveal">
+        <h3>Repairs &amp; relines</h3>
+        <p>Cracked, loose or uncomfortable? Many repairs can be done the same day.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== 6. YOUR JOURNEY (horizontal scroll) ===================== -->
+  <section class="journey" id="journey">
+    <div class="journey-head">
+      <div class="eyebrow">Your journey</div>
+      <h2>From first visit to new smile.</h2>
+      <div class="journey-progress"><span></span></div>
+    </div>
+    <div class="track">
+      <div class="panel">
+        <div class="step">Step 1 · Free</div>
+        <div class="title">Consultation</div>
+        <div class="desc">Talk through your options, see examples of our work and get a fixed quote. No pressure.</div>
+      </div>
+      <div class="panel">
+        <div class="step">Step 2</div>
+        <div class="title">Impressions</div>
+        <div class="desc">We take precise moulds and measurements and choose your tooth shape and shade together.</div>
+      </div>
+      <div class="panel">
+        <div class="step">Step 3</div>
+        <div class="title">Try-in</div>
+        <div class="desc">You try a wax version first, so you can see and feel your new smile before it's finished.</div>
+      </div>
+      <div class="panel">
+        <div class="step">Step 4</div>
+        <div class="title">Fitting</div>
+        <div class="desc">Your finished dentures are fitted and fine-tuned for comfort before you leave.</div>
+      </div>
+      <div class="panel">
+        <div class="step">Step 5 · Included</div>
+        <div class="title">Aftercare</div>
+        <div class="desc">Follow-up visits to adjust any sore spots, plus care tips to make them last.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 7. REVIEWS ===================== -->
+  <!-- Replace with real Google reviews (with the patient's permission). -->
+  <section class="reviews">
+    <div class="section-head">
+      <div class="eyebrow reveal">Patient reviews</div>
+      <h2 class="reveal">Trusted by locals.</h2>
+    </div>
+    <div class="review-grid">
+      <figure class="review reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>[Paste a real patient review here.]</blockquote>
+        <figcaption>[Patient name], Google review</figcaption>
+      </figure>
+      <figure class="review reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>[Paste a real patient review here.]</blockquote>
+        <figcaption>[Patient name], Google review</figcaption>
+      </figure>
+      <figure class="review reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>[Paste a real patient review here.]</blockquote>
+        <figcaption>[Patient name], Google review</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== 8. FAQ ===================== -->
+  <section class="faq" id="faq">
+    <div class="section-head">
+      <div class="eyebrow reveal">Questions</div>
+      <h2 class="reveal">Good to know.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="reveal">
+        <summary>How much do dentures cost?</summary>
+        <p>It depends on the type of denture and materials. Your first consultation is free and you'll get a fixed written quote before anything starts. Payment plans are available.</p>
+      </details>
+      <details class="reveal">
+        <summary>How long does the process take?</summary>
+        <p>Most new dentures take [3 to 5] appointments over a few weeks. Repairs can often be done the same day.</p>
+      </details>
+      <details class="reveal">
+        <summary>Do I need a referral from my dentist?</summary>
+        <p>No. You can book with us directly. If you need treatment from a dentist first, we'll let you know.</p>
+      </details>
+      <details class="reveal">
+        <summary>Will my dentures look natural?</summary>
+        <p>Yes. You choose the tooth shape and shade with us, and you see a try-in version before your dentures are finished.</p>
+      </details>
+      <details class="reveal">
+        <summary>What if they feel uncomfortable?</summary>
+        <p>A short adjustment period is normal. Follow-up adjustments are included, so just call us and we'll fix any sore spots.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== 9. CONTACT / ENQUIRY ===================== -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-info reveal">
+        <div class="eyebrow">Get in touch</div>
+        <h2>Book your free consultation.</h2>
+        <p>Prefer to talk? Call us and a real person will answer.</p>
+        <a href="tel:+6430000000" class="big-phone">03 000 0000</a>
+        <ul class="contact-details">
+          <li><strong>Address</strong>[123 Example Street, Christchurch]</li>
+          <li><strong>Hours</strong>Mon–Fri 8:30am–5pm</li>
+          <li><strong>Email</strong><a href="mailto:hello@example.co.nz">hello@example.co.nz</a></li>
+        </ul>
+      </div>
+
+      <!-- Demo form: shows a thank-you message but doesn't send anything.
+           In WordPress, replace it with a WPForms / Contact Form 7 shortcode. -->
+      <form class="enquiry reveal" id="enquiry">
+        <label>Name<input type="text" name="name" required autocomplete="name"></label>
+        <label>Phone<input type="tel" name="phone" required autocomplete="tel"></label>
+        <label>Email<input type="email" name="email" autocomplete="email"></label>
+        <label>I'm interested in
+          <select name="interest">
+            <option>Full dentures</option>
+            <option>Partial dentures</option>
+            <option>Implant-retained dentures</option>
+            <option>Repair or reline</option>
+            <option>Not sure yet</option>
+          </select>
+        </label>
+        <label>Anything we should know? <span class="optional">(optional)</span>
+          <textarea name="message" rows="3"></textarea>
+        </label>
+        <button type="submit" class="btn btn-full">Request my free consultation</button>
+        <p class="form-note">We'll call you back within one business day.</p>
+        <p class="form-success" hidden>Thanks! We'll be in touch within one business day.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="logo">Brightside<span>Dentures</span></div>
+    <p>[123 Example Street, Christchurch] · <a href="tel:+6430000000">03 000 0000</a></p>
+    <p class="small">Placeholder content. Replace with the clinic's real details.</p>
+  </footer>
+
+  <!-- Mobile-only sticky bar so calling is always one tap away -->
+  <div class="mobile-cta">
+    <a href="tel:+6430000000" class="btn btn-ghost">📞 Call</a>
+    <a href="#contact" class="btn">Free consult</a>
+  </div>
+
+
+  <!-- ===================== LIBRARIES (from CDN) ===================== -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>

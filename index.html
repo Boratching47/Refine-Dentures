@@ -1,729 +1,359 @@
-<title>Chomper</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brightside Denture Clinic</title>
+  <meta name="description" content="Premium, natural-looking dentures. Free consultations, clear pricing and aftercare included.">
 
-<style>
-/* dark dental theater, single-theme by design */
-:root {
-  --bg: #0b0b12;
-  --surface: rgba(255,255,255,0.04);
-  --border: rgba(255,255,255,0.08);
-  --accent: #ff8fa3;
-  --accent-dim: rgba(255,143,163,0.12);
-  --fg: #e8ddd0;
-  --fg-dim: #a09890;
-  --muted: #5a5868;
-  color-scheme: dark;
-}
+  <!-- Inter font (free stand-in for Apple's SF Pro) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: 'DM Mono', monospace;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-block: max(1.5rem, env(safe-area-inset-top, 0px)) max(2rem, env(safe-area-inset-bottom, 0px));
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  overflow-x: hidden;
-  min-height: 100%;
-}
+  <!-- =========================================================
+       PLACEHOLDERS: everything in [square brackets], the phone
+       number, address, stats and reviews must be replaced with
+       the clinic's real details before going live.
+       ========================================================= -->
 
-header {
-  text-align: center;
-  margin-bottom: 1.25rem;
-}
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav">
+    <a href="#top" class="logo">Brightside<span>Dentures</span></a>
+    <div class="nav-links">
+      <a href="#showcase">Our dentures</a>
+      <a href="#why">Why us</a>
+      <a href="#journey">Your visit</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-actions">
+      <a href="tel:+6430000000" class="nav-phone">📞 03 000 0000</a>
+      <a href="#contact" class="nav-book">Free consult</a>
+    </div>
+  </nav>
 
-h1 {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.6rem, 5vw, 2.8rem);
-  letter-spacing: -0.03em;
-  line-height: 1;
-  background: linear-gradient(160deg, #fff5f7 20%, var(--accent) 80%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-wrap: balance;
-}
+  <!-- ===================== 1. HERO ===================== -->
+  <!-- Goal: say what we do, why trust us, and how to get in touch, in one screen -->
+  <header class="hero" id="top">
+    <div class="hero-content">
+      <div class="eyebrow hero-in">Premium dentures · Christchurch</div>
+      <h1 class="hero-in">Dentures that feel like <span class="accent-text">your own smile.</span></h1>
+      <p class="hero-in lead">Made by a registered clinical dental technician, using premium materials, with a free first consultation and aftercare included.</p>
+      <div class="hero-in cta-row">
+        <a href="#contact" class="btn">Book a free consultation</a>
+        <a href="tel:+6430000000" class="btn btn-ghost">Call 03 000 0000</a>
+      </div>
 
-.tagline {
-  font-size: 0.63rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 0.35rem;
-}
+      <!-- Trust bar: quick reasons to believe -->
+      <ul class="trust-bar hero-in">
+        <li><strong>★ 4.9</strong> Google rating</li>
+        <li><strong>15+</strong> years experience</li>
+        <li><strong>Free</strong> first consult</li>
+        <li><strong>Payment</strong> plans available</li>
+      </ul>
+    </div>
+  </header>
 
-/* ── Stage ────────────────────────────────────────────── */
-.stage-wrap {
-  position: relative;
-  width: min(540px, 92vw);
-}
+  <!-- ===================== 2. PINNED STATEMENT ===================== -->
+  <section class="statement">
+    <h2 class="statement-text">Look natural.<br>Feel secure.<br><span class="accent-text">Smile again.</span></h2>
+  </section>
 
-.stage-glow {
-  position: absolute;
-  inset: -25%;
-  background: radial-gradient(ellipse 55% 45% at 50% 55%, rgba(255,143,163,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
+  <!-- ===================== 3. DENTURE SHOWCASE ===================== -->
+  <!-- On scroll: photo starts enlarged, shrinks to the side, then
+       each feature pops out one by one. Then scrolling moves on.
+       Replace images/denture.svg with a real photo of the clinic's work. -->
+  <section class="showcase" id="showcase">
+    <div class="showcase-head">
+      <div class="eyebrow">Crafted, not mass-produced</div>
+      <h2>What makes our dentures different.</h2>
+    </div>
 
-canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-  touch-action: none;
-  border-radius: 18px;
-  cursor: grab;
-}
+    <div class="showcase-inner">
+      <div class="showcase-media">
+        <img src="images/denture.svg" alt="A premium full upper denture">
+        <!-- Hotspots: --x / --y are % positions on the image. Move them to match your real photo. -->
+        <span class="hotspot" style="--x:50%; --y:22%">1</span>
+        <span class="hotspot" style="--x:17%; --y:42%">2</span>
+        <span class="hotspot" style="--x:50%; --y:50%">3</span>
+        <span class="hotspot" style="--x:81%; --y:61%">4</span>
+        <button class="enlarge-btn" type="button" aria-label="Enlarge photo">⤢ Enlarge</button>
+      </div>
 
-canvas:active { cursor: grabbing; }
+      <ol class="showcase-points">
+        <li class="point">
+          <span class="point-num">1</span>
+          <div>
+            <h3>Multi-layer premium teeth</h3>
+            <p>Built in layers like natural enamel, so they catch the light like real teeth and resist staining and wear.</p>
+          </div>
+        </li>
+        <li class="point">
+          <span class="point-num">2</span>
+          <div>
+            <h3>Lifelike gum shading</h3>
+            <p>Gums are tinted to match your own, so the edge of the denture blends in instead of looking like plastic.</p>
+          </div>
+        </li>
+        <li class="point">
+          <span class="point-num">3</span>
+          <div>
+            <h3>Precision-fitted base</h3>
+            <p>A high-impact base moulded to your mouth for a secure fit that doesn't rock, rub or slip when you talk.</p>
+          </div>
+        </li>
+        <li class="point">
+          <span class="point-num">4</span>
+          <div>
+            <h3>Balanced, comfortable bite</h3>
+            <p>Teeth are set so your bite feels even, making chewing easier and reducing sore spots.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
 
-/* ── Info panel ────────────────────────────────────────── */
-.info-panel {
-  width: min(540px, 92vw);
-  margin-top: 0.9rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.85rem 1rem;
-  min-height: 60px;
-  transition: border-color 0.25s, background 0.25s;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
+  <!-- Lightbox for the enlarged photo -->
+  <dialog class="lightbox" id="lightbox" aria-label="Enlarged denture photo">
+    <button class="lightbox-close" type="button" aria-label="Close">✕</button>
+    <img src="images/denture.svg" alt="A premium full upper denture, enlarged">
+  </dialog>
 
-.info-panel.lit {
-  border-color: rgba(255,143,163,0.25);
-  background: rgba(255,143,163,0.05);
-}
+  <!-- ===================== 4. WHY US: COMPARISON ===================== -->
+  <!-- Shows how we compare to a standard denture, without naming competitors -->
+  <section class="why" id="why">
+    <div class="section-head">
+      <div class="eyebrow reveal">Why choose us</div>
+      <h2 class="reveal">Not all dentures are equal.</h2>
+      <p class="reveal">Here's what you get with us compared with a standard, budget denture.</p>
+    </div>
 
-.info-label {
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: var(--accent-dim);
-  padding: 0.15rem 0.55rem;
-  border-radius: 100px;
-  align-self: flex-start;
-}
+    <div class="compare reveal" role="table" aria-label="Brightside dentures compared with standard dentures">
+      <div class="compare-row compare-header" role="row">
+        <span role="columnheader"></span>
+        <span role="columnheader" class="col-us">Brightside</span>
+        <span role="columnheader">Standard denture</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Teeth</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Multi-layer premium teeth</span>
+        <span role="cell"><i class="no">–</i> Single-colour acrylic</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Gums</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Shade-matched to you</span>
+        <span role="cell"><i class="no">–</i> One standard pink</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Fit</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Try-in before final fitting</span>
+        <span role="cell"><i class="no">–</i> Adjusted after it's made</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Who you see</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Same clinician start to finish</span>
+        <span role="cell"><i class="no">–</i> Often sent to an outside lab</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Aftercare</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Follow-up adjustments included</span>
+        <span role="cell"><i class="no">–</i> Charged per visit</span>
+      </div>
+      <div class="compare-row" role="row">
+        <span role="rowheader">Pricing</span>
+        <span role="cell" class="col-us"><i class="yes">✓</i> Fixed quote up front</span>
+        <span role="cell"><i class="no">–</i> Extras added later</span>
+      </div>
+    </div>
 
-.info-text {
-  font-size: 0.79rem;
-  line-height: 1.58;
-  color: var(--fg-dim);
-}
+    <!-- Stats count up when they scroll into view. Replace with real figures. -->
+    <div class="stats">
+      <div class="stat reveal"><span class="stat-num" data-count="15" data-suffix="+">0</span><span>Years experience</span></div>
+      <div class="stat reveal"><span class="stat-num" data-count="2000" data-suffix="+">0</span><span>Smiles restored</span></div>
+      <div class="stat reveal"><span class="stat-num" data-count="4.9" data-decimals="1" data-suffix="★">0</span><span>Google rating</span></div>
+    </div>
+  </section>
 
-.info-prompt {
-  font-size: 0.72rem;
-  color: var(--muted);
-  font-style: italic;
-  align-self: center;
-}
+  <!-- ===================== 5. SERVICES ===================== -->
+  <section class="services" id="services">
+    <div class="section-head">
+      <div class="eyebrow reveal">What we offer</div>
+      <h2 class="reveal">The right denture for you.</h2>
+    </div>
+    <div class="service-grid">
+      <article class="service reveal">
+        <h3>Full dentures</h3>
+        <p>A complete set of upper and/or lower teeth, made to look natural and fit securely.</p>
+        <span class="tag">Most popular</span>
+      </article>
+      <article class="service reveal">
+        <h3>Partial dentures</h3>
+        <p>Fills the gaps where some teeth are missing, clipped discreetly to your own teeth.</p>
+      </article>
+      <article class="service reveal">
+        <h3>Implant-retained dentures</h3>
+        <p>Clicks onto implants for the most secure fit. No adhesive, no movement.</p>
+      </article>
+      <article class="service reveal">
+        <h3>Repairs &amp; relines</h3>
+        <p>Cracked, loose or uncomfortable? Many repairs can be done the same day.</p>
+      </article>
+    </div>
+  </section>
 
-/* ── Hints ─────────────────────────────────────────────── */
-.hints {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin-top: 0.75rem;
-}
+  <!-- ===================== 6. YOUR JOURNEY (horizontal scroll) ===================== -->
+  <section class="journey" id="journey">
+    <div class="journey-head">
+      <div class="eyebrow">Your journey</div>
+      <h2>From first visit to new smile.</h2>
+      <div class="journey-progress"><span></span></div>
+    </div>
+    <div class="track">
+      <div class="panel">
+        <div class="step">Step 1 · Free</div>
+        <div class="title">Consultation</div>
+        <div class="desc">Talk through your options, see examples of our work and get a fixed quote. No pressure.</div>
+      </div>
+      <div class="panel">
+        <div class="step">Step 2</div>
+        <div class="title">Impressions</div>
+        <div class="desc">We take precise moulds and measurements and choose your tooth shape and shade together.</div>
+      </div>
+      <div class="panel">
+        <div class="step">Step 3</div>
+        <div class="title">Try-in</div>
+        <div class="desc">You try a wax version first, so you can see and feel your new smile before it's finished.</div>
+      </div>
+      <div class="panel">
+        <div class="step">Step 4</div>
+        <div class="title">Fitting</div>
+        <div class="desc">Your finished dentures are fitted and fine-tuned for comfort before you leave.</div>
+      </div>
+      <div class="panel">
+        <div class="step">Step 5 · Included</div>
+        <div class="title">Aftercare</div>
+        <div class="desc">Follow-up visits to adjust any sore spots, plus care tips to make them last.</div>
+      </div>
+    </div>
+  </section>
 
-.hint {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.61rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
+  <!-- ===================== 7. REVIEWS ===================== -->
+  <!-- Replace with real Google reviews (with the patient's permission). -->
+  <section class="reviews">
+    <div class="section-head">
+      <div class="eyebrow reveal">Patient reviews</div>
+      <h2 class="reveal">Trusted by locals.</h2>
+    </div>
+    <div class="review-grid">
+      <figure class="review reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>[Paste a real patient review here.]</blockquote>
+        <figcaption>[Patient name], Google review</figcaption>
+      </figure>
+      <figure class="review reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>[Paste a real patient review here.]</blockquote>
+        <figcaption>[Patient name], Google review</figcaption>
+      </figure>
+      <figure class="review reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>[Paste a real patient review here.]</blockquote>
+        <figcaption>[Patient name], Google review</figcaption>
+      </figure>
+    </div>
+  </section>
 
-.hint svg { opacity: 0.5; flex-shrink: 0; }
+  <!-- ===================== 8. FAQ ===================== -->
+  <section class="faq" id="faq">
+    <div class="section-head">
+      <div class="eyebrow reveal">Questions</div>
+      <h2 class="reveal">Good to know.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="reveal">
+        <summary>How much do dentures cost?</summary>
+        <p>It depends on the type of denture and materials. Your first consultation is free and you'll get a fixed written quote before anything starts. Payment plans are available.</p>
+      </details>
+      <details class="reveal">
+        <summary>How long does the process take?</summary>
+        <p>Most new dentures take [3 to 5] appointments over a few weeks. Repairs can often be done the same day.</p>
+      </details>
+      <details class="reveal">
+        <summary>Do I need a referral from my dentist?</summary>
+        <p>No. You can book with us directly. If you need treatment from a dentist first, we'll let you know.</p>
+      </details>
+      <details class="reveal">
+        <summary>Will my dentures look natural?</summary>
+        <p>Yes. You choose the tooth shape and shade with us, and you see a try-in version before your dentures are finished.</p>
+      </details>
+      <details class="reveal">
+        <summary>What if they feel uncomfortable?</summary>
+        <p>A short adjustment period is normal. Follow-up adjustments are included, so just call us and we'll fix any sore spots.</p>
+      </details>
+    </div>
+  </section>
 
-/* ── Chat ──────────────────────────────────────────────── */
-.chat-wrap {
-  width: min(540px, 92vw);
-  margin-top: 1.4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
+  <!-- ===================== 9. CONTACT / ENQUIRY ===================== -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-info reveal">
+        <div class="eyebrow">Get in touch</div>
+        <h2>Book your free consultation.</h2>
+        <p>Prefer to talk? Call us and a real person will answer.</p>
+        <a href="tel:+6430000000" class="big-phone">03 000 0000</a>
+        <ul class="contact-details">
+          <li><strong>Address</strong>[123 Example Street, Christchurch]</li>
+          <li><strong>Hours</strong>Mon–Fri 8:30am–5pm</li>
+          <li><strong>Email</strong><a href="mailto:hello@example.co.nz">hello@example.co.nz</a></li>
+        </ul>
+      </div>
 
-.chat-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.61rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
+      <!-- Demo form: shows a thank-you message but doesn't send anything.
+           In WordPress, replace it with a WPForms / Contact Form 7 shortcode. -->
+      <form class="enquiry reveal" id="enquiry">
+        <label>Name<input type="text" name="name" required autocomplete="name"></label>
+        <label>Phone<input type="tel" name="phone" required autocomplete="tel"></label>
+        <label>Email<input type="email" name="email" autocomplete="email"></label>
+        <label>I'm interested in
+          <select name="interest">
+            <option>Full dentures</option>
+            <option>Partial dentures</option>
+            <option>Implant-retained dentures</option>
+            <option>Repair or reline</option>
+            <option>Not sure yet</option>
+          </select>
+        </label>
+        <label>Anything we should know? <span class="optional">(optional)</span>
+          <textarea name="message" rows="3"></textarea>
+        </label>
+        <button type="submit" class="btn btn-full">Request my free consultation</button>
+        <p class="form-note">We'll call you back within one business day.</p>
+        <p class="form-success" hidden>Thanks! We'll be in touch within one business day.</p>
+      </form>
+    </div>
+  </section>
 
-.chat-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #52c278;
-  box-shadow: 0 0 6px #52c278;
-  flex-shrink: 0;
-}
+  <footer class="footer">
+    <div class="logo">Brightside<span>Dentures</span></div>
+    <p>[123 Example Street, Christchurch] · <a href="tel:+6430000000">03 000 0000</a></p>
+    <p class="small">Placeholder content. Replace with the clinic's real details.</p>
+  </footer>
 
-.chat-log {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.85rem;
-  min-height: 130px;
-  max-height: 220px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  scroll-behavior: smooth;
-}
-
-.chat-log:empty::after {
-  content: 'Ask Dr. Chompsworth anything about teeth, dentures, or oral health…';
-  font-size: 0.74rem;
-  color: var(--muted);
-  font-style: italic;
-  align-self: center;
-  text-align: center;
-  line-height: 1.5;
-}
-
-.msg { display: flex; flex-direction: column; gap: 0.18rem; max-width: 90%; }
-
-.msg-who {
-  font-size: 0.56rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.45;
-}
-
-.msg-text {
-  font-size: 0.78rem;
-  line-height: 1.58;
-  padding: 0.55rem 0.75rem;
-  border-radius: 10px;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.msg.user { align-self: flex-end; align-items: flex-end; }
-.msg.user .msg-text { background: #1c1828; color: var(--fg); border-bottom-right-radius: 3px; }
-
-.msg.ai { align-self: flex-start; align-items: flex-start; }
-.msg.ai .msg-text {
-  background: #150c12;
-  color: var(--fg-dim);
-  border: 1px solid rgba(255,143,163,0.1);
-  border-bottom-left-radius: 3px;
-}
-
-.msg.ai.streaming .msg-text::after {
-  content: '▋';
-  color: var(--accent);
-  animation: cur 0.8s step-end infinite;
-  margin-left: 2px;
-}
-
-@keyframes cur { 0%,100%{opacity:1} 50%{opacity:0} }
-
-.chat-offline {
-  font-size: 0.74rem;
-  color: var(--muted);
-  font-style: italic;
-  text-align: center;
-  padding: 0.5rem 0;
-  line-height: 1.5;
-}
-
-.chat-row {
-  display: flex;
-  gap: 0.55rem;
-}
-
-.chat-input {
-  flex: 1;
-  min-width: 0;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.62rem 0.85rem;
-  color: var(--fg);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.8rem;
-  outline: none;
-  transition: border-color 0.2s;
-  caret-color: var(--accent);
-}
-
-.chat-input:focus { border-color: rgba(255,143,163,0.28); }
-.chat-input::placeholder { color: var(--muted); }
-.chat-input:disabled { opacity: 0.45; }
-
-.chat-send {
-  background: var(--accent-dim);
-  border: 1px solid rgba(255,143,163,0.22);
-  border-radius: 8px;
-  color: var(--accent);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.76rem;
-  padding: 0.62rem 0.95rem;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: background 0.15s;
-}
-
-.chat-send:hover:not(:disabled) { background: rgba(255,143,163,0.2); }
-.chat-send:disabled { opacity: 0.38; cursor: not-allowed; }
-</style>
-
-<header>
-  <h1>Chomper</h1>
-  <p class="tagline">Interactive Denture Simulator</p>
-</header>
-
-<div class="stage-wrap">
-  <div class="stage-glow"></div>
-  <canvas id="c" width="600" height="370"></canvas>
-</div>
-
-<div class="info-panel" id="info">
-  <p class="info-prompt">Click any part of the mouth to learn more →</p>
-</div>
-
-<div class="hints">
-  <div class="hint">
-    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-      <path d="M6.5 1.5v10M3.5 8.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Drag jaw
+  <!-- Mobile-only sticky bar so calling is always one tap away -->
+  <div class="mobile-cta">
+    <a href="tel:+6430000000" class="btn btn-ghost">📞 Call</a>
+    <a href="#contact" class="btn">Free consult</a>
   </div>
-  <div class="hint">
-    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-      <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M4.5 6.5h4M6.5 4.5v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-    Tap parts
-  </div>
-  <div class="hint">
-    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-      <path d="M2 4h9M2 6.5h6M2 9h7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-    Chat below
-  </div>
-</div>
 
-<div class="chat-wrap">
-  <div class="chat-header">
-    <span class="chat-dot"></span>
-    Dr. Chompsworth — AI Dental Assistant
-  </div>
-  <div class="chat-log" id="log"></div>
-  <div class="chat-row">
-    <input type="text" class="chat-input" id="cin" placeholder="Ask about teeth, dentures, oral care…" autocomplete="off">
-    <button class="chat-send" id="send" disabled>Send</button>
-  </div>
-</div>
 
-<script>
-/* ═══════════════════════════════════════ Canvas / Mouth ══ */
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
-const W = 600, H = 370, CX = W / 2, CY = H / 2;
+  <!-- ===================== LIBRARIES (from CDN) ===================== -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 
-let open = 0.25, target = 0.25;
-let pointerDown = false, isDragging = false;
-let dragY0 = 0, dragOpen0 = 0, clickY0 = 0;
-let chomp = false, chompT = 0;
-let speechT = 0, speechTarget = 0;
-let lastKey = 0;
-let idleT = 0;
-let tongueX = 0, tongueXt = 0;
-let hoverZone = null;
-let glow = 0;
-
-const UY = CY - 28;
-const lY = () => CY + 28 + open * 150;
-
-/* ── Rounded rect helper ─────────────────────────────── */
-function rr(x, y, w, h, r) {
-  if (typeof r === 'number') r = [r,r,r,r];
-  const [tl,tr,br,bl] = r;
-  ctx.beginPath();
-  ctx.moveTo(x+tl,y); ctx.lineTo(x+w-tr,y);
-  ctx.arcTo(x+w,y,x+w,y+tr,tr); ctx.lineTo(x+w,y+h-br);
-  ctx.arcTo(x+w,y+h,x+w-br,y+h,br); ctx.lineTo(x+bl,y+h);
-  ctx.arcTo(x,y+h,x,y+h-bl,bl); ctx.lineTo(x,y+tl);
-  ctx.arcTo(x,y,x+tl,y,tl); ctx.closePath();
-}
-
-/* ── Hit zone detection ──────────────────────────────── */
-function getZone(mx, my) {
-  const ly = lY();
-  const TX = 162; // half-width of teeth region
-
-  if (my > UY && my < UY + 38 && Math.abs(mx - CX) < TX)
-    return my < UY + 13 ? 'upperGum' : 'upperTeeth';
-
-  if (ly - UY > 20 && my < ly && my > ly - 38 && Math.abs(mx - CX) < TX)
-    return my > ly - 13 ? 'lowerGum' : 'lowerTeeth';
-
-  if (open > 0.12) {
-    const ty = ly - 16, tw = 108 + open*30, th = 20 + open*16, tx = CX + tongueX*18;
-    if ((mx-tx)**2/tw**2 + (my-ty)**2/th**2 < 1) return 'tongue';
-  }
-
-  const midY = (UY+ly)/2, halfO = (ly-UY)/2;
-  if (open > 0.07 && (mx-CX)**2/196**2 + (my-midY)**2/(halfO*halfO) < 1)
-    return 'throat';
-
-  if (my > UY - 22 && my < UY + 12) return 'upperLip';
-  if (ly - UY > 10 && my > ly - 10 && my < ly + 28) return 'lowerLip';
-  return null;
-}
-
-/* ── Zone info data ──────────────────────────────────── */
-const ZONES = {
-  upperTeeth: { label: 'Upper Incisors',
-    text: 'Central and lateral incisors anchor your upper denture plate. Quality upper teeth are sized to your facial proportions — acrylic or porcelain, shade-matched to look natural against your skin tone.' },
-  lowerTeeth: { label: 'Lower Teeth',
-    text: 'Lower denture teeth sit on a more challenging ridge. The lingual bar runs behind them for stability, but lower plates are notoriously trickier to fit — small adjustments make a big difference.' },
-  upperGum: { label: 'Upper Alveolar Ridge',
-    text: 'This ridge gives your denture its suction seal. Bone resorption gradually changes its shape, which is why most dentures need relining every 2–3 years to maintain a proper fit.' },
-  lowerGum: { label: 'Lower Gum Ridge',
-    text: 'Lower gum health directly affects bite force. A well-shaped ridge supports 10–15 lbs of chewing pressure — compared to 70+ lbs with natural teeth. Implant-supported options can close that gap.' },
-  tongue: { label: 'Tongue',
-    text: 'Your tongue is an unsung hero of denture stability. The lingual seal it creates with the lower plate\'s inner edge can mean the difference between a plate that stays put and one that slips.' },
-  upperLip: { label: 'Upper Lip',
-    text: 'The upper lip\'s fullness signals healthy dental support. Good upper dentures restore its natural drape — poor vertical dimension causes premature aging and the characteristic "sunken" look.' },
-  lowerLip: { label: 'Lower Lip',
-    text: 'Lip support is one of the first signs of quality denture work. The vertical dimension — how far apart your jaws rest — shapes the lower third of your face and affects speech clarity.' },
-  throat: { label: 'Oral Cavity',
-    text: 'The mouth\'s interior tells the whole story. Proper saliva flow, a healthy palate, and strong cheek muscles all contribute to how well a denture performs day to day.' },
-};
-
-/* ── Info panel ──────────────────────────────────────── */
-const infoEl = document.getElementById('info');
-function showInfo(zone) {
-  const d = ZONES[zone];
-  if (!d) { infoEl.className = 'info-panel'; infoEl.innerHTML = '<p class="info-prompt">Click any part of the mouth to learn more →</p>'; return; }
-  infoEl.className = 'info-panel lit';
-  infoEl.innerHTML = `<span class="info-label">${d.label}</span><p class="info-text">${d.text}</p>`;
-}
-
-/* ── Draw helpers ────────────────────────────────────── */
-function drawBg() {
-  const g = ctx.createRadialGradient(CX,CY+15,12,CX,CY,320);
-  g.addColorStop(0,'#141222'); g.addColorStop(1,'#080810');
-  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-  const ag = ctx.createRadialGradient(CX,CY+20,0,CX,CY+20,250);
-  ag.addColorStop(0,'rgba(255,110,145,0.07)'); ag.addColorStop(1,'transparent');
-  ctx.fillStyle=ag; ctx.fillRect(0,0,W,H);
-}
-
-function drawGlow(zone, ly) {
-  if (!zone || glow < 0.01) return;
-  ctx.save(); ctx.globalAlpha = glow * 0.15; ctx.fillStyle = '#ff8fa3';
-  const n=8, tw=37, startX=CX-(n/2)*tw+tw*0.08;
-  if (zone==='upperTeeth'||zone==='upperGum') ctx.fillRect(startX-6,UY-6,n*tw+12,54);
-  else if (zone==='lowerTeeth'||zone==='lowerGum') ctx.fillRect(startX-6,ly-54,n*tw+12,54);
-  else if (zone==='tongue') { ctx.beginPath(); ctx.ellipse(CX+tongueX*18,ly-16,145,48,0,0,Math.PI*2); ctx.fill(); }
-  else if (zone==='upperLip') { ctx.beginPath(); ctx.ellipse(CX,UY+4,228,30,0,0,Math.PI*2); ctx.fill(); }
-  else if (zone==='lowerLip') { ctx.beginPath(); ctx.ellipse(CX,ly+8,228,30,0,0,Math.PI*2); ctx.fill(); }
-  else if (zone==='throat') { const mY=(UY+ly)/2, h=(ly-UY)/2; ctx.beginPath(); ctx.ellipse(CX,mY,182,h,0,0,Math.PI*2); ctx.fill(); }
-  ctx.restore();
-}
-
-function drawInterior(ly) {
-  if (open < 0.02) return;
-  const half=(ly-UY)/2, midY=(UY+ly)/2;
-  ctx.save(); ctx.beginPath(); ctx.ellipse(CX,midY,196,half+8,0,0,Math.PI*2); ctx.clip();
-  const dg=ctx.createRadialGradient(CX,midY+half*0.4,5,CX,midY,200);
-  dg.addColorStop(0,'#190710'); dg.addColorStop(0.4,'#270f18'); dg.addColorStop(1,'#1b0b14');
-  ctx.fillStyle=dg; ctx.fillRect(0,0,W,H); ctx.restore();
-}
-
-function drawTongue(ly) {
-  if (open < 0.12) return;
-  const half=(ly-UY)/2, midY=(UY+ly)/2, a=Math.min(1,(open-0.12)/0.16);
-  ctx.save(); ctx.globalAlpha=a;
-  ctx.beginPath(); ctx.ellipse(CX,midY,190,half,0,0,Math.PI*2); ctx.clip();
-  const ty=ly-16+Math.sin(idleT*0.55)*2.5, tw=108+open*30, th=20+open*16, tx=CX+tongueX*18;
-  const tg=ctx.createRadialGradient(tx,ty-th*0.2,4,tx,ty,tw*0.65);
-  tg.addColorStop(0,'#e07888'); tg.addColorStop(0.55,'#d05a74'); tg.addColorStop(1,'#b04060');
-  ctx.beginPath(); ctx.ellipse(tx,ty,tw,th,0,0,Math.PI*2); ctx.fillStyle=tg; ctx.fill();
-  ctx.beginPath(); ctx.moveTo(tx,ty-th*0.68); ctx.lineTo(tx,ty+th*0.42);
-  ctx.strokeStyle='rgba(0,0,0,0.18)'; ctx.lineWidth=2; ctx.stroke();
-  ctx.beginPath(); ctx.ellipse(tx-tw*0.18,ty-th*0.12,tw*0.2,th*0.28,-0.3,0,Math.PI*2);
-  ctx.fillStyle='rgba(255,255,255,0.15)'; ctx.fill(); ctx.restore();
-}
-
-function drawTeeth(isUpper, jawY) {
-  if (open < 0.015) return;
-  const n=8, tw=isUpper?37:35, th=isUpper?(28+open*9):(24+open*7);
-  const startX=CX-(n/2)*tw+tw*0.08, gY=isUpper?jawY+10:jawY-10;
-  const gg=ctx.createLinearGradient(0,gY-14,0,gY+14);
-  if(isUpper){gg.addColorStop(0,'#c85870');gg.addColorStop(1,'#b84a62');}
-  else{gg.addColorStop(0,'#b84a62');gg.addColorStop(1,'#c85870');}
-  ctx.fillStyle=gg; ctx.beginPath();
-  if(isUpper){
-    ctx.moveTo(startX-14,gY+th+14);
-    for(let i=0;i<n;i++){const x=startX+i*tw;ctx.lineTo(x+tw*0.1,gY+5);ctx.quadraticCurveTo(x+tw*0.5,gY-2,x+tw*0.9,gY+5);}
-    ctx.lineTo(startX+n*tw+14,gY+th+14);
-  }else{
-    ctx.moveTo(startX-14,gY-th-14);
-    for(let i=0;i<n;i++){const x=startX+i*tw;ctx.lineTo(x+tw*0.1,gY-5);ctx.quadraticCurveTo(x+tw*0.5,gY+2,x+tw*0.9,gY-5);}
-    ctx.lineTo(startX+n*tw+14,gY-th-14);
-  }
-  ctx.closePath(); ctx.fill();
-  for(let i=0;i<n;i++){
-    const x=startX+i*tw, gap=1.8, w=tw-gap*2, h=th-Math.abs(i-(n-1)/2)*1.7;
-    const ty2=isUpper?gY+3:gY-3-h, radii=isUpper?[2,2,5,5]:[5,5,2,2];
-    const tg=ctx.createLinearGradient(x+gap,ty2,x+gap,ty2+h);
-    if(isUpper){tg.addColorStop(0,'#f6f1e9');tg.addColorStop(0.45,'#ede5d2');tg.addColorStop(1,'#d9cdb8');}
-    else{tg.addColorStop(0,'#d9cdb8');tg.addColorStop(0.55,'#ede5d2');tg.addColorStop(1,'#f6f1e9');}
-    rr(x+gap,ty2,w,h,radii); ctx.fillStyle=tg; ctx.fill();
-    rr(x+gap+w*0.12,ty2+(isUpper?2:h*0.28),w*0.22,h*0.42,2); ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.fill();
-    if(i<n-1){ctx.beginPath();ctx.moveTo(x+tw-gap-0.5,ty2);ctx.lineTo(x+tw-gap-0.5,ty2+h);ctx.strokeStyle='rgba(0,0,0,0.1)';ctx.lineWidth=1;ctx.stroke();}
-  }
-}
-
-function drawSaliva(ly) {
-  const s=0.04,e=0.58;
-  if(open<s||open>e) return;
-  const t=(open-s)/(e-s), a=Math.min(t*2,(1-t)*2,1)*0.65;
-  ctx.save(); ctx.globalAlpha=a;
-  [-28,0,28].forEach((ox,ii)=>{
-    const j=Math.sin(idleT+ii*2.1)*3,mY=(UY+ly)/2;
-    ctx.beginPath();ctx.moveTo(CX+ox,UY+16);ctx.bezierCurveTo(CX+ox+j,mY-10,CX+ox-j,mY+10,CX+ox,ly-14);
-    ctx.strokeStyle='rgba(185,215,245,0.5)';ctx.lineWidth=1.2;ctx.stroke();
-  });
-  ctx.restore();
-}
-
-function drawLips(ly) {
-  const lW=215,lH=16;
-  ctx.save();ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=18;ctx.shadowOffsetY=3;
-  const ulg=ctx.createLinearGradient(0,UY-lH,0,UY+lH+8);
-  ulg.addColorStop(0,'#dd6882');ulg.addColorStop(0.45,'#c45a70');ulg.addColorStop(1,'#a84c62');
-  ctx.fillStyle=ulg;
-  ctx.beginPath();
-  ctx.moveTo(CX-lW,UY+8);ctx.bezierCurveTo(CX-lW+54,UY+8,CX-36,UY-lH,CX,UY-lH);
-  ctx.bezierCurveTo(CX+36,UY-lH,CX+lW-54,UY+8,CX+lW,UY+8);
-  ctx.bezierCurveTo(CX+lW-16,UY+lH+8,CX+36,UY+lH+2,CX,UY+lH+4);
-  ctx.bezierCurveTo(CX-36,UY+lH+2,CX-lW+16,UY+lH+8,CX-lW,UY+8);
-  ctx.closePath();ctx.fill();ctx.restore();
-
-  ctx.save();ctx.beginPath();ctx.ellipse(CX-28,UY-lH*0.25,42,lH*0.34,-0.1,0,Math.PI*2);
-  ctx.fillStyle='rgba(255,255,255,0.13)';ctx.fill();ctx.restore();
-
-  ctx.save();ctx.shadowColor='rgba(0,0,0,0.4)';ctx.shadowBlur=15;ctx.shadowOffsetY=5;
-  const llg=ctx.createLinearGradient(0,ly-lH-5,0,ly+lH+14);
-  llg.addColorStop(0,'#b84e64');llg.addColorStop(0.5,'#af4a5e');llg.addColorStop(1,'#963c50');
-  ctx.fillStyle=llg;
-  ctx.beginPath();
-  ctx.moveTo(CX-lW,ly-8);ctx.bezierCurveTo(CX-lW+16,ly-lH-5,CX-36,ly-lH-3,CX,ly-lH-5);
-  ctx.bezierCurveTo(CX+36,ly-lH-3,CX+lW-16,ly-lH-5,CX+lW,ly-8);
-  ctx.bezierCurveTo(CX+lW-54,ly+lH+4,CX+40,ly+lH+14,CX,ly+lH+16);
-  ctx.bezierCurveTo(CX-40,ly+lH+14,CX-lW+54,ly+lH+4,CX-lW,ly-8);
-  ctx.closePath();ctx.fill();ctx.restore();
-
-  ctx.save();ctx.beginPath();ctx.ellipse(CX,ly+lH*0.3,56,lH*0.38,0,0,Math.PI*2);
-  ctx.fillStyle='rgba(255,255,255,0.11)';ctx.fill();ctx.restore();
-
-  [CX-lW,CX+lW].forEach(cx2=>{
-    const mY=(UY+8+ly-8)/2, cg=ctx.createRadialGradient(cx2,mY,0,cx2,mY,20);
-    cg.addColorStop(0,'rgba(80,15,30,0.55)');cg.addColorStop(1,'transparent');
-    ctx.fillStyle=cg;ctx.beginPath();ctx.ellipse(cx2,mY,17,22,0,0,Math.PI*2);ctx.fill();
-  });
-}
-
-function frame() {
-  ctx.clearRect(0,0,W,H);
-  const ly=lY();
-  drawBg(); drawInterior(ly); drawTongue(ly);
-  drawGlow(hoverZone, ly);
-  drawTeeth(true,UY); drawTeeth(false,ly);
-  drawSaliva(ly); drawLips(ly);
-}
-
-/* ── Animation loop ────────────────────────────────── */
-let last=0;
-function tick(now){
-  requestAnimationFrame(tick);
-  const dt=Math.min((now-last)/1000,0.05);
-  last=now; idleT+=dt;
-
-  if(chomp){
-    chompT+=dt*9;
-    if(chompT<0.45) target=Math.max(0.02,0.28-chompT*0.55);
-    else if(chompT<1.3) target=0.12+(chompT-0.45)*0.3;
-    else{chomp=false;chompT=0;target=0.25;}
-  }
-
-  const sk=(Date.now()-lastKey)/1000;
-  speechTarget=sk<0.11?0.3+Math.sin(idleT*28)*0.18:0;
-  speechT+=(speechTarget-speechT)*dt*11;
-  tongueXt=sk<0.22?Math.sin(idleT*8)*0.85:0;
-  tongueX+=(tongueXt-tongueX)*dt*7;
-  if(!pointerDown&&!chomp) target=Math.max(0.22,speechT);
-
-  const gt=hoverZone?0.65:0;
-  glow+=(gt-glow)*dt*10;
-  open+=(target-open)*Math.min(1,dt*18);
-  open=Math.max(0,Math.min(1,open));
-  frame();
-}
-requestAnimationFrame(tick);
-
-/* ── Pointer events ──────────────────────────────── */
-function cxy(e){
-  const r=canvas.getBoundingClientRect();
-  return {x:(e.clientX-r.left)*W/r.width, y:(e.clientY-r.top)*H/r.height};
-}
-
-canvas.addEventListener('pointermove', e=>{
-  if(pointerDown){
-    if(!isDragging && Math.abs(e.clientY-dragY0)>6) isDragging=true;
-    if(isDragging){
-      const r=canvas.getBoundingClientRect();
-      target=Math.max(0,Math.min(1,dragOpen0+(e.clientY-dragY0)/(r.height*0.68)));
-    }
-  } else {
-    const {x,y}=cxy(e);
-    hoverZone=getZone(x,y);
-    canvas.style.cursor=hoverZone?'pointer':'grab';
-  }
-});
-
-canvas.addEventListener('pointerdown', e=>{
-  e.preventDefault();
-  pointerDown=true; isDragging=false;
-  dragY0=e.clientY; dragOpen0=open; clickY0=e.clientY;
-  canvas.setPointerCapture(e.pointerId);
-});
-
-canvas.addEventListener('pointerup', e=>{
-  const wasTap=!isDragging;
-  pointerDown=false; isDragging=false;
-  const {x,y}=cxy(e);
-  hoverZone=getZone(x,y);
-  canvas.style.cursor=hoverZone?'pointer':'grab';
-  if(wasTap){
-    const z=getZone(x,y);
-    if(z){ showInfo(z); chomp=true; chompT=0; target=0.42; }
-    else { chomp=true; chompT=0; target=0.55; }
-  }
-});
-
-canvas.addEventListener('pointerleave', ()=>{ if(!pointerDown){ hoverZone=null; canvas.style.cursor='grab'; } });
-
-/* ═══════════════════════════════════════════ AI Chat ══ */
-const logEl   = document.getElementById('log');
-const cinEl   = document.getElementById('cin');
-const sendEl  = document.getElementById('send');
-
-const SYS = 'You are Dr. Chompsworth, a warm and slightly witty AI dental assistant embedded in an interactive denture simulator. Answer questions about teeth, dentures, and oral health in 2–4 sentences. Always recommend seeing a real dentist for personal concerns — never diagnose or prescribe.';
-
-let chatHist = []; // {role, content}[]
-let busy = false;
-
-function bubble(role, txt, stream=false){
-  const d=document.createElement('div');
-  d.className=`msg ${role}${stream?' streaming':''}`;
-  d.innerHTML=`<span class="msg-who">${role==='user'?'You':'Dr. Chompsworth'}</span><div class="msg-text"></div>`;
-  d.querySelector('.msg-text').textContent=txt;
-  logEl.appendChild(d);
-  logEl.scrollTop=logEl.scrollHeight;
-  return d;
-}
-
-function setTxt(el,txt){
-  el.querySelector('.msg-text').textContent=txt;
-  logEl.scrollTop=logEl.scrollHeight;
-}
-
-function buildInput(){
-  // Prepend system to first user message so the conversation has instructions
-  return chatHist.map((m,i)=>
-    i===0&&m.role==='user' ? {role:'user',content:SYS+'\n\n'+m.content} : m
-  );
-}
-
-async function send(){
-  const txt=cinEl.value.trim();
-  if(!txt||busy||!sampleAPI) return;
-  busy=true; cinEl.value=''; sendEl.disabled=true;
-
-  bubble('user',txt);
-  chatHist.push({role:'user',content:txt});
-
-  const aiEl=bubble('ai','…',true);
-  try {
-    const res=await sampleAPI(buildInput(),{
-      onText:({text:t})=>{ if(t){setTxt(aiEl,t);lastKey=Date.now();} }
-    });
-    aiEl.classList.remove('streaming');
-    setTxt(aiEl,res.text);
-    chatHist.push({role:'assistant',content:res.text});
-  } catch(err) {
-    aiEl.classList.remove('streaming');
-    chatHist.pop();
-    setTxt(aiEl,err?.code==='rate_limited'
-      ? 'One moment — too many messages. Try again shortly.'
-      : 'Dr. Chompsworth is unavailable right now. Please try again.');
-  }
-
-  busy=false; sendEl.disabled=false; cinEl.focus();
-}
-
-sendEl.addEventListener('click',send);
-cinEl.addEventListener('keydown',e=>{
-  lastKey=Date.now();
-  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}
-});
-cinEl.addEventListener('input',()=>{lastKey=Date.now();});
-
-/* ── Init sample capability ────────────────────────── */
-let sampleAPI = null;
-
-(async()=>{
-  try {
-    const s = await window.claude?.use('sample');
-    if(!s){
-      const p=document.createElement('p');
-      p.className='chat-offline';
-      p.textContent='AI chat is unavailable in this context.';
-      logEl.replaceWith(p);
-      return;
-    }
-    sampleAPI=s;
-    sendEl.disabled=false;
-    // Greeting
-    const gr=bubble('ai','',true);
-    try {
-      const r=await s([{role:'user',content:SYS+'\n\nGreet the user in one witty sentence (under 18 words).'}],{
-        onText:({text:t})=>{if(t)setTxt(gr,t);}
-      });
-      gr.classList.remove('streaming');
-      setTxt(gr,r.text);
-      chatHist=[];
-    } catch { gr.remove(); }
-  } catch(e) {
-    console.warn('sample capability error',e);
-  }
-})();
-</script>
+  <script src="script.js"></script>
+</body>
+</html>

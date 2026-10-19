@@ -1,0 +1,522 @@
+<title>Chomper</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+/* layout: centered stage, dark dental theater */
+:root {
+  --bg: #0b0b12;
+  --accent: #ff8fa3;
+  --fg: #e8ddd0;
+  --muted: #6a6878;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'DM Mono', monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: max(2rem, env(safe-area-inset-top, 0px)) max(2rem, env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+  min-height: 100%;
+  gap: 0;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(160deg, #fff5f7 20%, var(--accent) 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-wrap: balance;
+}
+
+.tagline {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+
+.stage-wrap {
+  position: relative;
+  width: min(540px, 92vw);
+}
+
+.stage-glow {
+  position: absolute;
+  inset: -25%;
+  background: radial-gradient(ellipse 55% 45% at 50% 55%, rgba(255,143,163,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: grab;
+  touch-action: none;
+  border-radius: 18px;
+}
+
+canvas:active { cursor: grabbing; }
+
+.hints {
+  display: flex;
+  justify-content: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hint svg { opacity: 0.55; flex-shrink: 0; }
+
+.type-row {
+  margin-top: 1.6rem;
+  width: min(540px, 92vw);
+}
+
+.type-label {
+  display: block;
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  color: var(--fg);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+  transition: border-color 0.25s;
+  caret-color: var(--accent);
+}
+
+textarea:focus { border-color: rgba(255,143,163,0.3); }
+textarea::placeholder { color: var(--muted); }
+</style>
+
+<header>
+  <h1>Chomper</h1>
+  <p class="tagline">Interactive Denture Simulator</p>
+</header>
+
+<div class="stage-wrap">
+  <div class="stage-glow"></div>
+  <canvas id="c" width="600" height="370"></canvas>
+</div>
+
+<div class="hints">
+  <div class="hint">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M7 2v10M4 9l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Drag jaw
+  </div>
+  <div class="hint">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M5.5 5.5l3 3M8.5 5.5l-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    Click to bite
+  </div>
+  <div class="hint">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <rect x="2" y="3" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M4 11.5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    Type to talk
+  </div>
+</div>
+
+<div class="type-row">
+  <label class="type-label" for="txt">Say something</label>
+  <textarea id="txt" rows="2" placeholder="Type here and watch the mouth move…"></textarea>
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = 600, H = 370;
+const CX = W / 2, CY = H / 2;
+
+/* ── State ─────────────────────────────────────────────────── */
+let open = 0.25;           // 0 = sealed, 1 = fully agape
+let target = 0.25;
+let drag = false, dragY0 = 0, dragOpen0 = 0, clickY0 = 0;
+let chomp = false, chompT = 0;
+let speechT = 0, speechTarget = 0;
+let lastKey = 0;
+let idleT = 0;
+let tongueX = 0, tongueXt = 0;
+
+/* Upper jaw Y is fixed; lower jaw Y descends with open */
+const UY = CY - 28;
+function lY() { return CY + 28 + open * 150; }
+
+/* ── Rounded rect helper ───────────────────────────────────── */
+function rr(x, y, w, h, r) {
+  if (typeof r === 'number') r = [r, r, r, r];
+  const [tl, tr, br, bl] = r;
+  ctx.beginPath();
+  ctx.moveTo(x + tl, y);
+  ctx.lineTo(x + w - tr, y);
+  ctx.arcTo(x + w, y, x + w, y + tr, tr);
+  ctx.lineTo(x + w, y + h - br);
+  ctx.arcTo(x + w, y + h, x + w - br, y + h, br);
+  ctx.lineTo(x + bl, y + h);
+  ctx.arcTo(x, y + h, x, y + h - bl, bl);
+  ctx.lineTo(x, y + tl);
+  ctx.arcTo(x, y, x + tl, y, tl);
+  ctx.closePath();
+}
+
+/* ── Draw calls ────────────────────────────────────────────── */
+function drawBg() {
+  const g = ctx.createRadialGradient(CX, CY + 15, 12, CX, CY, 320);
+  g.addColorStop(0, '#141222');
+  g.addColorStop(1, '#080810');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
+
+  const ag = ctx.createRadialGradient(CX, CY + 20, 0, CX, CY + 20, 250);
+  ag.addColorStop(0, 'rgba(255,110,145,0.07)');
+  ag.addColorStop(1, 'transparent');
+  ctx.fillStyle = ag;
+  ctx.fillRect(0, 0, W, H);
+}
+
+function drawInterior(ly) {
+  if (open < 0.02) return;
+  const halfOpen = (ly - UY) / 2;
+  const midY = (UY + ly) / 2;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(CX, midY, 196, halfOpen + 8, 0, 0, Math.PI * 2);
+  ctx.clip();
+
+  const dg = ctx.createRadialGradient(CX, midY + halfOpen * 0.4, 6, CX, midY, 200);
+  dg.addColorStop(0, '#190710');
+  dg.addColorStop(0.4, '#270f18');
+  dg.addColorStop(1, '#1b0b14');
+  ctx.fillStyle = dg;
+  ctx.fillRect(0, 0, W, H);
+  ctx.restore();
+}
+
+function drawTongue(ly) {
+  if (open < 0.12) return;
+  const halfOpen = (ly - UY) / 2;
+  const midY = (UY + ly) / 2;
+  const a = Math.min(1, (open - 0.12) / 0.16);
+
+  ctx.save();
+  ctx.globalAlpha = a;
+  ctx.beginPath();
+  ctx.ellipse(CX, midY, 190, halfOpen, 0, 0, Math.PI * 2);
+  ctx.clip();
+
+  const ty = ly - 16 + Math.sin(idleT * 0.55) * 2.5;
+  const tw = 108 + open * 30;
+  const th = 20 + open * 16;
+  const tx = CX + tongueX * 18;
+
+  const tg = ctx.createRadialGradient(tx, ty - th * 0.2, 4, tx, ty, tw * 0.65);
+  tg.addColorStop(0, '#e07888');
+  tg.addColorStop(0.55, '#d05a74');
+  tg.addColorStop(1, '#b04060');
+  ctx.beginPath();
+  ctx.ellipse(tx, ty, tw, th, 0, 0, Math.PI * 2);
+  ctx.fillStyle = tg;
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(tx, ty - th * 0.68);
+  ctx.lineTo(tx, ty + th * 0.42);
+  ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.ellipse(tx - tw * 0.18, ty - th * 0.12, tw * 0.2, th * 0.28, -0.3, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255,255,255,0.15)';
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawTeeth(isUpper, jawY) {
+  if (open < 0.015) return;
+  const n = 8;
+  const tw = isUpper ? 37 : 35;
+  const th = isUpper ? (28 + open * 9) : (24 + open * 7);
+  const startX = CX - (n / 2) * tw + tw * 0.08;
+  const gY = isUpper ? jawY + 10 : jawY - 10;
+
+  /* gum */
+  const gg = ctx.createLinearGradient(0, gY - 14, 0, gY + 14);
+  if (isUpper) { gg.addColorStop(0, '#c85870'); gg.addColorStop(1, '#b84a62'); }
+  else          { gg.addColorStop(0, '#b84a62'); gg.addColorStop(1, '#c85870'); }
+  ctx.fillStyle = gg;
+
+  ctx.beginPath();
+  if (isUpper) {
+    ctx.moveTo(startX - 14, gY + th + 14);
+    for (let i = 0; i < n; i++) {
+      const x = startX + i * tw;
+      ctx.lineTo(x + tw * 0.1, gY + 5);
+      ctx.quadraticCurveTo(x + tw * 0.5, gY - 2, x + tw * 0.9, gY + 5);
+    }
+    ctx.lineTo(startX + n * tw + 14, gY + th + 14);
+  } else {
+    ctx.moveTo(startX - 14, gY - th - 14);
+    for (let i = 0; i < n; i++) {
+      const x = startX + i * tw;
+      ctx.lineTo(x + tw * 0.1, gY - 5);
+      ctx.quadraticCurveTo(x + tw * 0.5, gY + 2, x + tw * 0.9, gY - 5);
+    }
+    ctx.lineTo(startX + n * tw + 14, gY - th - 14);
+  }
+  ctx.closePath();
+  ctx.fill();
+
+  /* teeth */
+  for (let i = 0; i < n; i++) {
+    const x = startX + i * tw;
+    const gap = 1.8;
+    const w = tw - gap * 2;
+    const h = th - Math.abs(i - (n - 1) / 2) * 1.7;
+    const ty2 = isUpper ? gY + 3 : gY - 3 - h;
+    const radii = isUpper ? [2, 2, 5, 5] : [5, 5, 2, 2];
+
+    const tg = ctx.createLinearGradient(x + gap, ty2, x + gap, ty2 + h);
+    if (isUpper) {
+      tg.addColorStop(0, '#f6f1e9'); tg.addColorStop(0.45, '#ede5d2'); tg.addColorStop(1, '#d9cdb8');
+    } else {
+      tg.addColorStop(0, '#d9cdb8'); tg.addColorStop(0.55, '#ede5d2'); tg.addColorStop(1, '#f6f1e9');
+    }
+
+    rr(x + gap, ty2, w, h, radii);
+    ctx.fillStyle = tg;
+    ctx.fill();
+
+    rr(x + gap + w * 0.12, ty2 + (isUpper ? 2 : h * 0.28), w * 0.22, h * 0.42, 2);
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.fill();
+
+    if (i < n - 1) {
+      ctx.beginPath();
+      ctx.moveTo(x + tw - gap - 0.5, ty2);
+      ctx.lineTo(x + tw - gap - 0.5, ty2 + h);
+      ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  }
+}
+
+function drawSaliva(ly) {
+  const s = 0.04, e = 0.58;
+  if (open < s || open > e) return;
+  const t = (open - s) / (e - s);
+  const a = Math.min(t * 2, (1 - t) * 2, 1) * 0.65;
+
+  ctx.save();
+  ctx.globalAlpha = a;
+  [-28, 0, 28].forEach((ox, ii) => {
+    const j = Math.sin(idleT + ii * 2.1) * 3;
+    const mY = (UY + ly) / 2;
+    ctx.beginPath();
+    ctx.moveTo(CX + ox, UY + 16);
+    ctx.bezierCurveTo(CX + ox + j, mY - 10, CX + ox - j, mY + 10, CX + ox, ly - 14);
+    ctx.strokeStyle = 'rgba(185,215,245,0.5)';
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+  });
+  ctx.restore();
+}
+
+function drawLips(ly) {
+  const lW = 215, lH = 16;
+
+  /* upper lip */
+  ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,0.5)';
+  ctx.shadowBlur = 18;
+  ctx.shadowOffsetY = 3;
+
+  const ulg = ctx.createLinearGradient(0, UY - lH, 0, UY + lH + 8);
+  ulg.addColorStop(0, '#dd6882'); ulg.addColorStop(0.45, '#c45a70'); ulg.addColorStop(1, '#a84c62');
+  ctx.fillStyle = ulg;
+
+  ctx.beginPath();
+  ctx.moveTo(CX - lW, UY + 8);
+  ctx.bezierCurveTo(CX - lW + 54, UY + 8, CX - 36, UY - lH, CX, UY - lH);
+  ctx.bezierCurveTo(CX + 36, UY - lH, CX + lW - 54, UY + 8, CX + lW, UY + 8);
+  ctx.bezierCurveTo(CX + lW - 16, UY + lH + 8, CX + 36, UY + lH + 2, CX, UY + lH + 4);
+  ctx.bezierCurveTo(CX - 36, UY + lH + 2, CX - lW + 16, UY + lH + 8, CX - lW, UY + 8);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+
+  /* upper lip highlight */
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(CX - 28, UY - lH * 0.25, 42, lH * 0.34, -0.1, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255,255,255,0.13)';
+  ctx.fill();
+  ctx.restore();
+
+  /* lower lip */
+  ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,0.4)';
+  ctx.shadowBlur = 15;
+  ctx.shadowOffsetY = 5;
+
+  const llg = ctx.createLinearGradient(0, ly - lH - 5, 0, ly + lH + 14);
+  llg.addColorStop(0, '#b84e64'); llg.addColorStop(0.5, '#af4a5e'); llg.addColorStop(1, '#963c50');
+  ctx.fillStyle = llg;
+
+  ctx.beginPath();
+  ctx.moveTo(CX - lW, ly - 8);
+  ctx.bezierCurveTo(CX - lW + 16, ly - lH - 5, CX - 36, ly - lH - 3, CX, ly - lH - 5);
+  ctx.bezierCurveTo(CX + 36, ly - lH - 3, CX + lW - 16, ly - lH - 5, CX + lW, ly - 8);
+  ctx.bezierCurveTo(CX + lW - 54, ly + lH + 4, CX + 40, ly + lH + 14, CX, ly + lH + 16);
+  ctx.bezierCurveTo(CX - 40, ly + lH + 14, CX - lW + 54, ly + lH + 4, CX - lW, ly - 8);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+
+  /* lower lip highlight */
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(CX, ly + lH * 0.3, 56, lH * 0.38, 0, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255,255,255,0.11)';
+  ctx.fill();
+  ctx.restore();
+
+  /* corner shadows */
+  [CX - lW, CX + lW].forEach(cx2 => {
+    const midY = (UY + 8 + ly - 8) / 2;
+    const cg = ctx.createRadialGradient(cx2, midY, 0, cx2, midY, 20);
+    cg.addColorStop(0, 'rgba(80,15,30,0.55)');
+    cg.addColorStop(1, 'transparent');
+    ctx.fillStyle = cg;
+    ctx.beginPath();
+    ctx.ellipse(cx2, midY, 17, 22, 0, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function frame() {
+  ctx.clearRect(0, 0, W, H);
+  const ly = lY();
+  drawBg();
+  drawInterior(ly);
+  drawTongue(ly);
+  drawTeeth(true, UY);
+  drawTeeth(false, ly);
+  drawSaliva(ly);
+  drawLips(ly);
+}
+
+/* ── Animation loop ────────────────────────────────────────── */
+let last = 0;
+function tick(now) {
+  requestAnimationFrame(tick);
+  const dt = Math.min((now - last) / 1000, 0.05);
+  last = now;
+  idleT += dt;
+
+  if (chomp) {
+    chompT += dt * 9;
+    if (chompT < 0.45)      target = Math.max(0.02, 0.28 - chompT * 0.55);
+    else if (chompT < 1.3)  target = 0.12 + (chompT - 0.45) * 0.3;
+    else { chomp = false; chompT = 0; target = 0.25; }
+  }
+
+  const sinceKey = (Date.now() - lastKey) / 1000;
+  speechTarget = sinceKey < 0.11 ? 0.3 + Math.sin(idleT * 28) * 0.18 : 0;
+  speechT += (speechTarget - speechT) * dt * 11;
+  tongueXt = sinceKey < 0.22 ? Math.sin(idleT * 8) * 0.85 : 0;
+  tongueX += (tongueXt - tongueX) * dt * 7;
+
+  if (!drag && !chomp) target = Math.max(0.22, speechT);
+
+  open += (target - open) * Math.min(1, dt * 18);
+  open = Math.max(0, Math.min(1, open));
+
+  frame();
+}
+requestAnimationFrame(tick);
+
+/* ── Pointer events ────────────────────────────────────────── */
+canvas.addEventListener('pointerdown', e => {
+  e.preventDefault();
+  drag = true;
+  dragY0 = e.clientY;
+  dragOpen0 = open;
+  clickY0 = e.clientY;
+  canvas.setPointerCapture(e.pointerId);
+});
+
+canvas.addEventListener('pointermove', e => {
+  if (!drag) return;
+  const dy = e.clientY - dragY0;
+  const rect = canvas.getBoundingClientRect();
+  target = Math.max(0, Math.min(1, dragOpen0 + dy / (rect.height * 0.68)));
+});
+
+canvas.addEventListener('pointerup', e => {
+  const wasTap = Math.abs(e.clientY - clickY0) < 6;
+  drag = false;
+  if (wasTap && !chomp) { chomp = true; chompT = 0; target = 0.55; }
+});
+
+/* ── Typing ─────────────────────────────────────────────────── */
+document.getElementById('txt').addEventListener('input', () => {
+  lastKey = Date.now();
+  tongueXt = (Math.random() - 0.5) * 1.6;
+});
+</script>
